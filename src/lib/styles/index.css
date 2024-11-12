@@ -1,0 +1,26 @@
+/* Base styles */
+@import './base.css';
+
+/* Component styles */
+@import './modules/PaddedGrid.module.css';
+@import './modules/XGrid.module.css';
+@import './modules/YGrid.module.css';
+
+/* CSS Custom Properties */
+:root {
+  /* Grid System */
+  --grid-base: 8px;
+  --grid-max-width: 1200px;
+  --grid-z-index: 0;
+
+  /* Colors */
+  --grid-color-x: rgba(232, 19, 56, 0.063);
+  --grid-color-y: rgba(232, 19, 56, 0.376);
+
+  /* Breakpoints */
+  --grid-bp-sm: 640px;
+  --grid-bp-md: 768px;
+  --grid-bp-lg: 1024px;
+  --grid-bp-xl: 1280px;
+  --grid-bp-2xl: 1536px;
+}

@@ -1,0 +1,87 @@
+{
+  "name": "padded-grid",
+  "version": "0.1.0",
+  "description": "A lightweight, flexible baseline and grid system for React applications with precise control over spacing, gaps, and layout",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "style": "dist/styles.css",
+  "files": [
+    "dist",
+    "dist/styles.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsup src/lib/index.ts --format esm,cjs --dts --minify --clean",
+    "lint": "tsc --noEmit && eslint src/lib",
+    "format": "prettier --write \"src/lib/**/*.{ts,tsx,css}\"",
+    "prepare": "bun run build",
+    "prepublishOnly": "bun run lint && bun run build",
+    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.10",
+    "@types/bun": "latest",
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react-swc": "^3.7.2",
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6",
+    "prettier": "^3.4.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rollup": "^4.27.4",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "tsup": "^8.3.5",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.6",
+    "@testing-library/jest-dom": "^6.4.2"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "typescript": "^5.6.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react",
+    "grid",
+    "layout",
+    "typescript",
+    "baseline-grid",
+    "spacing",
+    "padding",
+    "responsive"
+  ],
+  "author": "Francois Denavaut",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnvt/padded-grid.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dnvt/padded-grid/issues"
+  },
+  "homepage": "https://github.com/dnvt/padded-grid#readme",
+  "engines": {
+    "node": ">=18"
+  }
+}

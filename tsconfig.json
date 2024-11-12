@@ -1,0 +1,63 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "useDefineForClassFields": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": false,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noEmit": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/lib/*"
+      ],
+      "@hooks": [
+        "src/lib/hooks/index.ts"
+      ],
+      "@types": [
+        "src/lib/types/index.ts"
+      ],
+      "@components": [
+        "src/lib/components/index.ts"
+      ],
+      "@utils": [
+        "src/lib/utils/index.ts"
+      ],
+      "@styles/*": [
+        "src/lib/styles/modules/*"
+      ]
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/lib/types"
+    ]
+  },
+  "include": [
+    "src/lib/**/*",
+    "src/lib/types/*.d.ts",
+    "src/lib/types/global.d.ts",
+    "src/demo/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+}

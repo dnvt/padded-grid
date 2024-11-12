@@ -1,0 +1,43 @@
+.container {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: var(--grid-height, 100%);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 180ms ease-out;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease-out, visibility 0ms linear 150ms;
+}
+
+.row {
+  height: var(--row-height, 1px);
+  width: 100%;
+  position: absolute;
+  top: var(--row-top);
+  background: var(--row-color, #ff000020);
+  opacity: var(--row-opacity, 1);
+  /* Prevent any animation on the row itself */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container.visible,
+  .container.hidden {
+    transition: none;
+  }
+}

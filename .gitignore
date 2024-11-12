@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+
+# Bun
+bun.lockb
+
+# Build output
+dist/
+stats.html
+
+# Cache
+.cache/
+.rollup.cache/
+tsup.config.tsbuildinfo
+*.tsbuildinfo
+
+# Testing
+coverage/
+.nyc_output/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+.fleet/
+.DS_Store
+
+# Debug
+npm-debug.log*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Temporary files
+*.tmp
+*.temp
+.temp/
+
+# Project specific
+.eslintcache
+.stylelintcache
