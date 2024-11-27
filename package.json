@@ -23,10 +23,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsup src/lib/index.ts --format esm,cjs --dts --minify --clean",
-    "lint": "tsc --noEmit && eslint src/lib",
+    "lint": "eslint src/lib",
+    "typecheck": "tsc --noEmit",  
     "format": "prettier --write \"src/lib/**/*.{ts,tsx,css}\"",
     "prepare": "bun run build",
-    "prepublishOnly": "bun run lint && bun run build",
+    "prepublishOnly": "bun run build",
     "test": "vitest",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",

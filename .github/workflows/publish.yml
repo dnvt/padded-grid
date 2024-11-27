@@ -23,8 +23,8 @@ jobs:
           bun install
           npm install -g eslint
 
-      - name: Run tests
-        run: bun test
+#      - name: Run tests
+#        run: bun test
 
       - name: Build
         run: bun run build

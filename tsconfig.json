@@ -43,6 +43,9 @@
         "src/lib/styles/modules/*"
       ]
     },
+    "types": [
+      "bun-types"
+    ],     
     "typeRoots": [
       "./node_modules/@types",
       "./src/lib/types"
