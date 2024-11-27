@@ -1,5 +1,9 @@
 {
-  "name": "padded-grid",
+  "name": "@dnvt/padded-grid",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "version": "0.1.1",
   "description": "A lightweight, flexible baseline and grid system for React applications with precise control over spacing, gaps, and layout",
   "type": "module",
@@ -24,7 +28,7 @@
     "dev": "vite",
     "build": "tsup src/lib/index.ts --format esm,cjs --dts --minify --clean",
     "lint": "eslint src/lib",
-    "typecheck": "tsc --noEmit",  
+    "typecheck": "tsc --noEmit",
     "format": "prettier --write \"src/lib/**/*.{ts,tsx,css}\"",
     "prepare": "bun run build",
     "prepublishOnly": "bun run build",
@@ -49,7 +53,6 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "autoprefixer": "^10.4.20",
-    "bun-types": "^1.1.37",
     "cssnano": "^7.0.6",
     "prettier": "^3.4.1",
     "react": "^18.3.1",
@@ -65,9 +68,6 @@
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",
     "typescript": "^5.6.3"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "keywords": [
     "react",
