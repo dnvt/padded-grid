@@ -43,9 +43,6 @@
         "src/lib/styles/modules/*"
       ]
     },
-    "types": [
-      "bun-types"
-    ],     
     "typeRoots": [
       "./node_modules/@types",
       "./src/lib/types"
@@ -54,7 +51,7 @@
   "include": [
     "src/lib/**/*",
     "src/lib/types/*.d.ts",
-    "src/demo/**/*"
+    "demo/**/*"
   ],
   "exclude": [
     "node_modules",
