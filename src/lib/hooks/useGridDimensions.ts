@@ -32,7 +32,7 @@ export function useGridDimensions(ref: RefObject<HTMLElement>) {
       observer.disconnect()
       window.removeEventListener('scroll', updateDimensions)
     }
-  }, [])
+  }, [ref])
 
   return dimensions
 }

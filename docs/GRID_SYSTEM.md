@@ -18,11 +18,7 @@ columnWidth = (containerWidth - (gap * (numberOfColumns - 1))) / numberOfColumns
 
 ```typescript
 // For mixed units (e.g., '1fr 2fr 1fr')
-totalFractions = sum
-of
-all
-fr
-units // e.g., 4fr total
+totalFractions = sum of all fr units // e.g., 4fr total
 fractionUnit = (containerWidth - fixedWidths - (gaps * (columns - 1))) / totalFractions
 
 // Example: [1fr, 2fr, 1fr] in 1200px container with 16px gaps

@@ -1,5 +1,4 @@
 import { memo, useMemo, useRef } from 'react'
-
 import { useGridCalculations, useGridDimensions } from '@hooks'
 import { GridVariant } from '@types'
 import {
@@ -26,8 +25,6 @@ export const XGrid = memo(function XGrid({
   variant,
   ...otherProps
 }: XGProps) {
-  if (!show) return null
-
   const containerRef = useRef<HTMLDivElement>(null)
   const { width } = useGridDimensions(containerRef)
 
@@ -38,12 +35,6 @@ export const XGrid = memo(function XGrid({
     }
     return gap
   }, [variant, gap])
-
-  const getColumnStyles = (
-    variant: GridVariant | undefined
-  ): Partial<XGStyles> => ({
-    '--column-width': variant === 'line' ? '1px' : undefined,
-  })
 
   const { gridTemplateColumns, columnsCount, calculatedGap } =
     useGridCalculations({
@@ -67,7 +58,6 @@ export const XGrid = memo(function XGrid({
       '--grid-justify': align,
       '--grid-padding': padding,
       '--column-color': color,
-      ...getColumnStyles(variant),
     }
 
     if (variant === 'line') {
@@ -81,10 +71,13 @@ export const XGrid = memo(function XGrid({
     maxWidth,
     columnsCount,
     align,
+    padding,
     color,
     style,
     variant,
   ])
+
+  if (!show) return null
 
   return (
     <div
@@ -109,5 +102,3 @@ export const XGrid = memo(function XGrid({
     </div>
   )
 })
-
-XGrid.displayName = 'XGrid'

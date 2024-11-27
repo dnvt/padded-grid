@@ -53,4 +53,4 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ## License
 
-MIT © [François Denavaut]
+MIT © [François Denavaut](https://github.com/dnvt)

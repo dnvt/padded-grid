@@ -50,6 +50,8 @@ function CardGrid() {
 
 ### Typography with Baseline Grid
 
+NOTE: Coming soon is padding-stack library, which will help facilitate aligning your text components to the baseline.
+
 ```tsx
 function Article() {
   return (
@@ -58,8 +60,8 @@ function Article() {
       <YGrid base={8} show={process.env.NODE_ENV === 'development'} />
 
       <article className="content">
-        <h1 style={{ marginBottom: 32 }}>Article Title</h1>
-        <p style={{ marginBottom: 24 }}>Article content...</p>
+        <h1 style={{ /* padding block to match the baseline */ }}>Article Title</h1>
+        <p style={{  /* padding block to match the baseline */ }}>Article content...</p>
       </article>
     </PaddedGrid>
   );

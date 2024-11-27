@@ -16,7 +16,7 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
     "strict": true,
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -51,7 +51,6 @@
   "include": [
     "src/lib/**/*",
     "src/lib/types/*.d.ts",
-    "src/lib/types/global.d.ts",
     "src/demo/**/*"
   ],
   "exclude": [

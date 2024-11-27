@@ -3,11 +3,9 @@
  * @module components
  */
 
-export { PaddedGrid } from './PaddedGrid'
-export { XGrid } from './XGrid'
-export { YGrid } from './YGrid'
+export * from './PaddedGrid'
+export * from './XGrid'
+export * from './YGrid'
 
-// Export component types
-export type { PGConfig, PGProps } from './PaddedGrid'
-export type { XGProps } from './XGrid'
-export type { YGProps } from './YGrid'
+// Re-export types
+export type { PGConfig, PGProps } from './PaddedGrid/types'

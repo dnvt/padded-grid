@@ -1,15 +1,12 @@
-import { memo, useMemo, useRef, useCallback, type CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
+import { memo, useMemo, useRef, useCallback } from 'react'
 
 import { useGridDimensions, useVisibleGridLines } from '@hooks'
-import { GridVariant } from '@types'
 import { clamp, combineClassNames, combineStyles, GRID } from '@utils'
+import { GridVariant } from '@types'
 
-import type { YGProps, YGStyles } from './types'
+import type { YGProps } from './types'
 import styles from '@styles/YGrid.module.css'
-
-function isNumericHeight(height: CSSProperties['height']): height is number {
-  return typeof height === 'number'
-}
 
 export const YGrid = memo(function YGrid({
   base = GRID.DEFAULTS.BASE,
@@ -20,13 +17,11 @@ export const YGrid = memo(function YGrid({
   className,
   style,
 }: YGProps) {
-  if (!show) return null
-
   const containerRef = useRef<HTMLDivElement>(null)
   const { height: containerHeight } = useGridDimensions(containerRef)
 
   const rowCount = useMemo(() => {
-    const totalHeight = isNumericHeight(height) ? height : containerHeight
+    const totalHeight = typeof height === 'number' ? height : containerHeight
     return clamp(Math.ceil(totalHeight / base), 1, 1000)
   }, [height, containerHeight, base])
 
@@ -38,9 +33,9 @@ export const YGrid = memo(function YGrid({
 
   const containerStyles = useMemo(
     () =>
-      combineStyles<Partial<YGStyles>>(
+      combineStyles(
         {
-          '--grid-height': isNumericHeight(height) ? `${height}px` : height,
+          '--grid-height': typeof height === 'number' ? `${height}px` : height,
           opacity: show ? 1 : 0,
           visibility: show ? 'visible' : 'hidden',
         },
@@ -50,7 +45,7 @@ export const YGrid = memo(function YGrid({
   )
 
   const getRowStyles = useCallback(
-    (idx: number): Partial<YGStyles> => ({
+    (idx: number) => ({
       '--row-top': `${idx * base}px`,
       '--row-color': color,
       '--row-height': variant === GridVariant.Line ? '1px' : `${base}px`,
@@ -70,13 +65,15 @@ export const YGrid = memo(function YGrid({
             styles.row,
             variant === 'flat' && styles.flatRow
           )}
-          style={getRowStyles(i)}
+          style={getRowStyles(i) as CSSProperties}
           data-row-index={i}
         />
       )
     }
     return rows
   }, [visibleRange, variant, getRowStyles])
+
+  if (!show) return null
 
   return (
     <div
@@ -94,5 +91,3 @@ export const YGrid = memo(function YGrid({
     </div>
   )
 })
-
-YGrid.displayName = 'YGrid'
