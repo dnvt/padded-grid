@@ -39,9 +39,9 @@ export const YGrid = memo(function YGrid({
           opacity: show ? 1 : 0,
           visibility: show ? 'visible' : 'hidden',
         },
-        style ?? {}
+        style ?? {},
       ),
-    [height, style, show]
+    [height, style, show],
   )
 
   const getRowStyles = useCallback(
@@ -52,7 +52,7 @@ export const YGrid = memo(function YGrid({
       '--row-opacity':
         variant === GridVariant.Flat && idx % 2 === 0 ? '0' : '1',
     }),
-    [base, color, variant]
+    [base, color, variant],
   )
 
   const visibleRows = useMemo(() => {
@@ -63,11 +63,11 @@ export const YGrid = memo(function YGrid({
           key={i}
           className={combineClassNames(
             styles.row,
-            variant === 'flat' && styles.flatRow
+            variant === 'flat' && styles.flatRow,
           )}
           style={getRowStyles(i) as CSSProperties}
           data-row-index={i}
-        />
+        />,
       )
     }
     return rows
@@ -81,7 +81,7 @@ export const YGrid = memo(function YGrid({
       className={combineClassNames(
         styles.container,
         className,
-        show ? styles.visible : styles.hidden
+        show ? styles.visible : styles.hidden,
       )}
       style={containerStyles}
       data-variant={variant}

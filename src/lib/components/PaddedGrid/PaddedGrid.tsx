@@ -1,4 +1,4 @@
-import { memo, useReducer, useEffect, type CSSProperties } from 'react'
+import { memo, useReducer, useEffect, type CSSProperties, useRef } from 'react'
 
 import type { PGProps, PGStates, PGActions } from '@components'
 import { useGridControls, useGridProps } from '@hooks'
@@ -51,16 +51,15 @@ export const PaddedGrid = memo(function PaddedGrid({
   reducer = defaultGridReducer,
   style = {},
 }: PGProps) {
-  const [state, dispatch] = useReducer<typeof defaultGridReducer>(
-    reducer,
-    initialState
-  )
+  const [state, dispatch] = useReducer(reducer, initialState)
 
+  // Get stable callbacks from controls
   const controls = useGridControls(state, dispatch)
+  const { getValidatedConfig, updateConfig } = controls
   const { getGridProps } = useGridProps(state)
 
   const getMaxWidthValue = (
-    maxWidth: CSSValue | ResponsiveValue<CSSValue>
+    maxWidth: CSSValue | ResponsiveValue<CSSValue>,
   ): CSSProperties['maxWidth'] => {
     if (typeof maxWidth === 'number') {
       return `${maxWidth}px`
@@ -74,27 +73,30 @@ export const PaddedGrid = memo(function PaddedGrid({
     return 'none'
   }
 
+  const prevConfigRef = useRef(state)
+
   useEffect(() => {
     if (config && isValidConfig(config)) {
-      const validConfig = controls.getValidatedConfig(config)
+      const validConfig = getValidatedConfig(config)
 
-      const hasConfigChanged =
-        validConfig.base !== state?.base ||
-        validConfig.maxWidth !== state?.maxWidth ||
-        validConfig.align !== state?.align ||
-        validConfig.zIndex !== state?.zIndex
-
-      if (hasConfigChanged) {
-        controls.updateConfig(validConfig)
+      if (
+        validConfig.base !== prevConfigRef.current.base ||
+        validConfig.maxWidth !== prevConfigRef.current.maxWidth ||
+        validConfig.align !== prevConfigRef.current.align ||
+        validConfig.zIndex !== prevConfigRef.current.zIndex
+      ) {
+        updateConfig(validConfig)
+        prevConfigRef.current = { ...prevConfigRef.current, ...validConfig }
       }
     }
-  }, [config, controls, state.base, state.maxWidth, state.align, state.zIndex])
+    // Dependencies are now just config, getValidatedConfig, and updateConfig
+  }, [config, getValidatedConfig, updateConfig])
 
   const containerProps = getGridProps({
     className: combineClassNames(
       styles.container,
       styles[state.align],
-      className
+      className,
     ),
     style: {
       ...style,

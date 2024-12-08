@@ -3,16 +3,15 @@ import { GridAlignment, GridVariant } from '@types'
 export const CSS_UNITS = ['px', 'rem', 'em', 'vh', 'vw', '%', 'fr'] as const
 
 export const GRID = {
-  /** Core default properties for grid components */
   DEFAULTS: {
-    ALIGN: GridAlignment.Center,
+    ALIGN: 'center' as GridAlignment,
     Z_INDEX: -1,
     BASE: 8,
     MAX_WIDTH: '1216px',
     COLUMN_WIDTH: '1fr',
     COLORS: {
-      X_GRID: '#e8133810',
-      Y_GRID: '#e8133860',
+      X_GRID: '#00baff26',
+      Y_GRID: '#e1e4ff',
     },
     GAP: 8,
     COLUMNS: 9,
@@ -27,7 +26,6 @@ export const GRID = {
     LINE: GridVariant.Line,
     FLAT: GridVariant.Flat,
   },
-  /** Responsive breakpoint definitions */
   BREAKPOINTS: {
     base: '1280px',
     sm: '640px',

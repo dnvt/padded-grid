@@ -93,7 +93,7 @@ export const XGrid = memo(function XGrid({
             key={i}
             className={combineClassNames(
               styles.column,
-              variant === GridVariant.Line && styles.lineColumn
+              variant === GridVariant.Line && styles.lineColumn,
             )}
             data-column-index={i}
           />

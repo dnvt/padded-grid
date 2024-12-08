@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "dist",
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "stripInternal": true,
+    "moduleResolution": "Node",
+    "module": "ESNext",
+    // If you used `bundler` before and run into issues resolving imports,
+    // switching to "Node" or "NodeNext" can help.
+
+    // Ensure we don't accidentally turn off emissions:
+    "noEmit": false
+  },
+  "include": [
+    "src/lib"
+  ]
+}

@@ -52,13 +52,13 @@ export type GridAction =
   | { type: 'UPDATE_CONFIG'; payload: Partial<PGConfig> }
   | { type: 'SET_PAGE_HEIGHT'; payload: number }
   | {
-      type: 'TOGGLE_GUIDE'
-      payload: { type: 'columns' | 'baseline'; value: boolean }
-    }
+  type: 'TOGGLE_GUIDE'
+  payload: { type: 'columns' | 'baseline'; value: boolean }
+}
   | {
-      type: 'UPDATE_COLUMN_CONFIG'
-      payload: Partial<GridState['columnConfig']>
-    }
+  type: 'UPDATE_COLUMN_CONFIG'
+  payload: Partial<GridState['columnConfig']>
+}
 
 function gridReducer(state: GridState, action: GridAction): GridState {
   switch (action.type) {

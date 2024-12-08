@@ -8,4 +8,4 @@ export * from './XGrid'
 export * from './YGrid'
 
 // Re-export types
-export type { PGConfig, PGProps } from './PaddedGrid/types'
+export type * from './PaddedGrid/types'

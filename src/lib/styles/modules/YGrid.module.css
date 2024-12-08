@@ -26,7 +26,7 @@
   width: 100%;
   position: absolute;
   top: var(--row-top);
-  background: var(--row-color, #ff000020);
+  background: var(--row-color, #e1e4ff);
   opacity: var(--row-opacity, 1);
   /* Prevent any animation on the row itself */
   transform: translate3d(0, 0, 0);

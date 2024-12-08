@@ -19,13 +19,13 @@ export function useVisibleGridLines({
     const startLine = Math.max(0, Math.floor(viewportTop / lineHeight) - buffer)
     const endLine = Math.min(
       totalLines,
-      Math.ceil(viewportBottom / lineHeight) + buffer
+      Math.ceil(viewportBottom / lineHeight) + buffer,
     )
 
     return { start: startLine, end: endLine }
   })
 
-  const rafRef = useRef<number>()
+  const rafRef = useRef<number>(null)
 
   const calculateVisibleRange = useCallback(() => {
     if (!containerRef.current) return
@@ -37,13 +37,13 @@ export function useVisibleGridLines({
     const startLine = Math.max(0, Math.floor(viewportTop / lineHeight) - buffer)
     const endLine = Math.min(
       totalLines,
-      Math.ceil(viewportBottom / lineHeight) + buffer
+      Math.ceil(viewportBottom / lineHeight) + buffer,
     )
 
     setVisibleRange((prev: VisibleRange) =>
       prev.start === startLine && prev.end === endLine
         ? prev
-        : { start: startLine, end: endLine }
+        : { start: startLine, end: endLine },
     )
   }, [containerRef, lineHeight, buffer, totalLines])
 
@@ -56,7 +56,7 @@ export function useVisibleGridLines({
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
       rafRef.current = requestAnimationFrame(throttledCalculate)
     }, 16),
-    [throttledCalculate]
+    [throttledCalculate],
   )
 
   useLayoutEffect(() => {

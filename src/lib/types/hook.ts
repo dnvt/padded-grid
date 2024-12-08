@@ -1,6 +1,6 @@
 import type { CSSProperties, HTMLAttributes, RefObject } from 'react'
 
-import type { PGConfig } from '@components'
+import type { PGActions, PGConfig, PGStates, PGStyles } from '@components'
 import type {
   GridAlignment,
   CSSValue,
@@ -33,7 +33,7 @@ export interface GridCalculationResult {
 export interface VisibleLinesConfig {
   totalLines: number
   lineHeight: number
-  containerRef: RefObject<HTMLElement>
+  containerRef: RefObject<HTMLDivElement | null>
   buffer?: number
 }
 
@@ -52,19 +52,20 @@ export interface GridControlState {
   styles: CSSProperties
 }
 
-export type GridControlAction =
-  | { type: 'UPDATE_CONFIG'; payload: Partial<PGConfig> }
-  | { type: 'UPDATE_STYLES'; payload: CSSProperties }
+export type GridControlAction = PGActions;
+
+export interface GridControlState extends PGStates {
+}
 
 export interface GridControlsResult {
-  updateConfig: (config: Partial<PGConfig>) => void
-  updateStyles: (styles: CSSProperties) => void
-  getValidatedConfig: (config: Partial<PGConfig>) => Partial<PGConfig>
-  currentState: GridControlState
+  updateConfig: (config: Partial<PGConfig>) => void;
+  updateStyles: (styles: Partial<PGStyles>) => void;
+  getValidatedConfig: (config: Partial<PGConfig>) => Partial<PGConfig>;
+  currentState: GridControlState;
 }
 
 export interface GridPropsResult {
   getGridProps: (
-    props?: HTMLAttributes<HTMLDivElement>
+    props?: HTMLAttributes<HTMLDivElement>,
   ) => HTMLAttributes<HTMLDivElement>
 }

@@ -1,3 +1,4 @@
+// vite.config.ts
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { resolve } from 'path'
@@ -8,30 +9,6 @@ const resolvePath = (...paths: string[]) => resolve(__dirname, ...paths)
 
 export default defineConfig(({ command }) => ({
   plugins: [react()],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/lib/__tests__/setup.ts'],
-    include: ['src/lib/**/*.{test,spec}.{ts,tsx}'],
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html'],
-      exclude: [
-        'node_modules/',
-        'src/lib/__tests__/',
-        '**/*.d.ts',
-        '**/*.test.{ts,tsx}',
-        '**/*.spec.{ts,tsx}',
-      ],
-    },
-    alias: {
-      '@': resolvePath('src/lib'),
-      '@constants': resolvePath('src/lib/constants'),
-      '@hooks': resolvePath('src/lib/hooks'),
-      '@types': resolvePath('src/lib/types'),
-      '@utils': resolvePath('src/lib/utils'),
-    },
-  },
   css: {
     modules: {
       generateScopedName:
@@ -73,11 +50,17 @@ export default defineConfig(({ command }) => ({
           react: 'React',
           'react-dom': 'ReactDOM',
         },
-        assetFileNames: 'styles/[name][extname]',
+        // Place all extracted CSS in a single file
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+            return 'styles.css'
+          }
+          return '[name][extname]'
+        },
       },
     },
     sourcemap: true,
-    cssCodeSplit: false,
+    cssCodeSplit: false, // Ensures one CSS file output
   },
   ...(command === 'serve' && {
     root: 'demo',

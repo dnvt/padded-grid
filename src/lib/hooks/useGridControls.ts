@@ -1,49 +1,51 @@
 import { useCallback, useMemo } from 'react'
 import type { CSSProperties, Dispatch } from 'react'
 
-import type { PGConfig } from '@components'
+import type { PGActions, PGConfig } from '@components'
 import type {
   GridControlState,
-  GridControlAction,
   GridControlsResult,
   GridPropsResult,
 } from '@types'
 import { clamp, GRID } from '@utils'
 
-// Control Props ---------------------------------------------------------------
+const VALID_ALIGNMENTS = ['start', 'center', 'end'] as const
 
 export function useGridControls(
   state: GridControlState,
-  dispatch: Dispatch<GridControlAction>
+  dispatch: Dispatch<PGActions>,
 ): GridControlsResult {
   const updateConfig = useCallback(
     (config: Partial<PGConfig>) => {
       dispatch({ type: 'UPDATE_CONFIG', payload: config })
     },
-    [dispatch]
+    [dispatch],
   )
 
   const updateStyles = useCallback(
     (styles: CSSProperties) => {
       dispatch({ type: 'UPDATE_STYLES', payload: styles })
     },
-    [dispatch]
+    [dispatch],
   )
 
-  const getValidatedConfig = useCallback(
-    (config: Partial<PGConfig>): Partial<PGConfig> => ({
+  const getValidatedConfig = useCallback((config: Partial<PGConfig>): Partial<PGConfig> => {
+    const candidateAlign =
+      config.align && VALID_ALIGNMENTS.includes(config.align)
+        ? config.align
+        : GRID.DEFAULTS.ALIGN
+
+    return {
       ...config,
       base: clamp(
         config.base ?? GRID.DEFAULTS.BASE,
         GRID.LIMITS.BASE.MIN,
-        GRID.LIMITS.BASE.MAX
+        GRID.LIMITS.BASE.MAX,
       ),
-      align: Object.values(GRID.DEFAULTS.ALIGN).includes(config.align ?? '')
-        ? config.align
-        : GRID.DEFAULTS.ALIGN,
-    }),
-    []
-  )
+      align: candidateAlign,
+    }
+  }, [])
+
 
   return {
     updateConfig,
@@ -52,8 +54,6 @@ export function useGridControls(
     currentState: state,
   }
 }
-
-// Props Getter ----------------------------------------------------------------
 
 export function useGridProps(state: GridControlState): GridPropsResult {
   return useMemo(
@@ -71,6 +71,6 @@ export function useGridProps(state: GridControlState): GridPropsResult {
         } as CSSProperties,
       }),
     }),
-    [state]
+    [state],
   )
 }

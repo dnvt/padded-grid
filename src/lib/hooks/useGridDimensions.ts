@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState, type RefObject } from 'react'
 import { rafThrottle } from '@utils'
 
-export function useGridDimensions(ref: RefObject<HTMLElement>) {
+export function useGridDimensions(ref: RefObject<HTMLDivElement | null>) {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 
   useLayoutEffect(() => {

@@ -29,7 +29,7 @@ export interface PGStyles extends BaseGridStyles {
 }
 
 export interface PGProps extends BaseComponentProps {
-  config: Partial<PGConfig>
+  config?: Partial<PGConfig>
   reducer?: (state: PGStates, action: PGActions) => PGStates
   style?: CSSProperties & Partial<PGStyles>
 }

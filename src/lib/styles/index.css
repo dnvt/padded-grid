@@ -1,10 +1,10 @@
 /* Base styles */
-@import './base.css';
+@import 'src/lib/styles/base.css';
 
 /* Component styles */
-@import './modules/PaddedGrid.module.css';
-@import './modules/XGrid.module.css';
-@import './modules/YGrid.module.css';
+@import 'src/lib/styles/modules/PaddedGrid.module.css';
+@import 'src/lib/styles/modules/XGrid.module.css';
+@import 'src/lib/styles/modules/YGrid.module.css';
 
 /* CSS Custom Properties */
 :root {
