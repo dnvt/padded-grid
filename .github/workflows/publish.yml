@@ -1,44 +1,53 @@
-name: Publish Package
+name: Release
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
 
 permissions:
   contents: write
+  pull-requests: write
+  id-token: write
 
 jobs:
-  publish:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - uses: oven-sh/setup-bun@v1
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
 
-      - name: Install dependencies
-        run: |
-          bun install
-          npm install -g eslint
-
-#      - name: Run tests
-#        run: bun test
+      - name: Install Dependencies
+        run: bun install
 
       - name: Build
         run: bun run build
 
-      - name: Publish to NPM
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-          npm publish --access public --ignore-scripts
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: bun run release
+          version: bun run version
+          commit: "chore: update version and changelog"
+          title: "chore: update version and changelog"
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
+        if: steps.changesets.outputs.published == 'true'
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: v${{ steps.changesets.outputs.version }}
           body_path: CHANGELOG.md
           files: |
             dist/*
